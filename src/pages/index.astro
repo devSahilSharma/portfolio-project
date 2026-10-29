@@ -1,9 +1,13 @@
 ---
 import Experience from '../components/Experience.astro';
 import Intro from '../components/Intro.astro';
+import Nav from '../components/Nav.astro';
+import Projects from '../components/Projects.astro';
 import { getProfile } from '../profile';
+import { getSiteSections } from '../site-sections';
 
 const profile = await getProfile();
+const shown = new Set((await getSiteSections()).map((section) => section.id));
 ---
 
 <html lang="en">
@@ -13,9 +17,13 @@ const profile = await getProfile();
     <title>{profile.name}</title>
   </head>
   <body>
+    <header>
+      <Nav />
+    </header>
     <main>
       <Intro />
-      <Experience />
+      {shown.has('experience') && <Experience />}
+      {shown.has('projects') && <Projects />}
     </main>
   </body>
 </html>

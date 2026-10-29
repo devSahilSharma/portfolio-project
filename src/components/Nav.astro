@@ -1,0 +1,19 @@
+---
+import { getSiteSections } from '../site-sections';
+
+const sections = await getSiteSections();
+---
+
+{
+  sections.length > 0 && (
+    <nav aria-label="Sections">
+      <ul>
+        {sections.map(({ label, href }) => (
+          <li>
+            <a href={href}>{label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}

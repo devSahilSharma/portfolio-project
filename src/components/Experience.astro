@@ -9,29 +9,24 @@ const monthYear = new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric
 const isoMonth = (date: Date) => date.toISOString().slice(0, 7);
 ---
 
-{/* A section appears only when it has content. */}
-{
-  experiences.length > 0 && (
-    <section aria-labelledby="experience-heading">
-      <h2 id="experience-heading">Experience</h2>
-      {
-        experiences.map(async ({ company, title, start, end, stack, entry }) => {
-          const { Content } = await render(entry);
-          return (
-            <article>
-              <h3>
-                {title}, {company}
-              </h3>
-              <p>
-                <time datetime={isoMonth(start)}>{monthYear.format(start)}</time> –{' '}
-                {end ? <time datetime={isoMonth(end)}>{monthYear.format(end)}</time> : 'Present'}
-              </p>
-              <Content />
-              <p>Stack: {stack.join(', ')}</p>
-            </article>
-          );
-        })
-      }
-    </section>
-  )
-}
+<section id="experience" aria-labelledby="experience-heading">
+  <h2 id="experience-heading">Experience</h2>
+  {
+    experiences.map(async ({ company, title, start, end, stack, entry }) => {
+      const { Content } = await render(entry);
+      return (
+        <article>
+          <h3>
+            {title}, {company}
+          </h3>
+          <p>
+            <time datetime={isoMonth(start)}>{monthYear.format(start)}</time> –{' '}
+            {end ? <time datetime={isoMonth(end)}>{monthYear.format(end)}</time> : 'Present'}
+          </p>
+          <Content />
+          <p>Stack: {stack.join(', ')}</p>
+        </article>
+      );
+    })
+  }
+</section>

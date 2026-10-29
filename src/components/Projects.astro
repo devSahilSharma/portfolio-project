@@ -1,0 +1,23 @@
+---
+import { getProjects } from '../projects';
+
+const projects = await getProjects();
+---
+
+<section id="projects" aria-labelledby="projects-heading">
+  <h2 id="projects-heading">Projects</h2>
+  {
+    projects.map(({ name, description, stack, demo, source }) => (
+      <article>
+        <h3>{name}</h3>
+        <p>{description}</p>
+        <p>Stack: {stack.join(', ')}</p>
+        <p>
+          {demo && <a href={demo}>Demo</a>}
+          {demo && source && ' · '}
+          {source && <a href={source}>Source</a>}
+        </p>
+      </article>
+    ))
+  }
+</section>

@@ -1,6 +1,6 @@
 # 05: Projects section, hidden when empty
 
-Status: ready-for-agent
+Status: completed.
 Blocked by: 01
 
 Spec: [spec.md](../spec.md)

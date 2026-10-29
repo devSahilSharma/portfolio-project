@@ -44,4 +44,22 @@ const experience = defineCollection({
     }),
 });
 
-export const collections = { profile, experience };
+// Projects are one JSON object keyed by id; the order in the file is the order on the page.
+const projects = defineCollection({
+  loader: file('src/content/projects.json'),
+  schema: z
+    .object({
+      name: z.string().min(1),
+      description: z.string().min(1),
+      stack: z.array(z.string().min(1)).min(1),
+      demo: z.url({ protocol: /^https$/ }).optional(),
+      source: z.url({ protocol: /^https$/ }).optional(),
+    })
+    // A Project is something a visitor can open themselves.
+    .refine((entry) => entry.demo || entry.source, {
+      message: 'a Project needs a demo link, a source link, or both',
+      path: ['demo'],
+    }),
+});
+
+export const collections = { profile, experience, projects };
