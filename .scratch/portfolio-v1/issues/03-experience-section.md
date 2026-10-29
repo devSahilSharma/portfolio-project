@@ -1,6 +1,6 @@
 # 03: Experience section
 
-Status: ready-for-agent
+Status: completed.
 Blocked by: 01
 
 Spec: [spec.md](../spec.md)

@@ -1,4 +1,5 @@
 ---
+import Experience from '../components/Experience.astro';
 import Intro from '../components/Intro.astro';
 import { getProfile } from '../profile';
 
@@ -14,6 +15,7 @@ const profile = await getProfile();
   <body>
     <main>
       <Intro />
+      <Experience />
     </main>
   </body>
 </html>

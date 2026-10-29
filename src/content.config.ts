@@ -1,5 +1,5 @@
 import { defineCollection } from 'astro:content';
-import { file } from 'astro/loaders';
+import { file, glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { socialNetworks } from './contact-links';
 
@@ -25,4 +25,23 @@ const profile = defineCollection({
     }),
 });
 
-export const collections = { profile };
+// One Markdown file per Experience. The frontmatter holds the facts; the body
+// is what the owner did there (a short summary and/or bullets).
+const experience = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/experience' }),
+  schema: z
+    .object({
+      company: z.string().min(1),
+      title: z.string().min(1),
+      start: z.coerce.date(),
+      // Absent means this is a current Experience.
+      end: z.coerce.date().optional(),
+      stack: z.array(z.string().min(1)).min(1),
+    })
+    .refine((entry) => !entry.end || entry.end >= entry.start, {
+      message: 'end must not be before start',
+      path: ['end'],
+    }),
+});
+
+export const collections = { profile, experience };
