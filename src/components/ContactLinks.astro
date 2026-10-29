@@ -1,0 +1,19 @@
+---
+import { contactLinks } from '../contact-links';
+import { getProfile } from '../profile';
+
+const profile = await getProfile();
+const links = contactLinks(profile);
+---
+
+<ul>
+  {
+    links.map(({ label, href }) => (
+      <li>
+        <a href={href} rel={href.startsWith('mailto:') ? undefined : 'me'}>
+          {label}
+        </a>
+      </li>
+    ))
+  }
+</ul>

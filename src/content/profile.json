@@ -1,0 +1,13 @@
+{
+  "name": "PLACEHOLDER Your Name",
+  "headline": "PLACEHOLDER Software engineer building things for the web",
+  "bio": "PLACEHOLDER Two or three sentences about who you are, what you work on, and what kind of opportunities you're open to. Replace this before launch.",
+  "photo": "../assets/profile-photo-placeholder.svg",
+  "photoAlt": "PLACEHOLDER Portrait of Your Name",
+  "email": "placeholder@example.com",
+  "social": {
+    "linkedin": "https://www.linkedin.com/in/placeholder",
+    "github": "https://github.com/placeholder",
+    "x": "https://x.com/placeholder"
+  }
+}

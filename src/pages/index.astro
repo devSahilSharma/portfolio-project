@@ -1,10 +1,19 @@
+---
+import Intro from '../components/Intro.astro';
+import { getProfile } from '../profile';
+
+const profile = await getProfile();
+---
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Personal Site</title>
+    <title>{profile.name}</title>
   </head>
   <body>
-    <h1>Personal Site</h1>
+    <main>
+      <Intro />
+    </main>
   </body>
 </html>
