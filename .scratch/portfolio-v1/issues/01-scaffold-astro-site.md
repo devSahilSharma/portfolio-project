@@ -1,6 +1,6 @@
 # 01: Scaffold the Astro site
 
-Status: ready-for-agent
+Status: completed.
 
 Spec: [spec.md](../spec.md)
 

@@ -1,6 +1,6 @@
 # 02: Intro and Contact links
 
-Status: ready-for-agent
+Status: completed.
 Blocked by: 01
 
 Spec: [spec.md](../spec.md)
