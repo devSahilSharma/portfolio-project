@@ -1,0 +1,2 @@
+# Keep PDFs byte-exact: a text-only PDF would otherwise get its line endings rewritten.
+*.pdf binary
