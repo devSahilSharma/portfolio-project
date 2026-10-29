@@ -1,0 +1,49 @@
+---
+import Nav from '../components/Nav.astro';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+
+if (!Astro.site) throw new Error('Set `site` in astro.config.mjs: canonical and sharing URLs need it');
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+// PLACEHOLDER until the design pass. Crawlers need an absolute URL.
+const previewImage = new URL('/og-placeholder.png', Astro.site).href;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={previewImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={previewImage} />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <header>
+      <Nav />
+    </header>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>

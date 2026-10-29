@@ -13,6 +13,8 @@ const profile = defineCollection({
     z.object({
       name: z.string().min(1),
       headline: z.string().min(1),
+      // Used in structured data, where the headline is too long to be a job title.
+      jobTitle: z.string().min(1),
       bio: z.string().min(1),
       photo: image(),
       photoAlt: z.string().min(1),

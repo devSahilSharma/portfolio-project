@@ -1,6 +1,6 @@
 # 06: SEO and sharing basics
 
-Status: ready-for-agent
+Status: completed.
 Blocked by: 02
 
 Spec: [spec.md](../spec.md)

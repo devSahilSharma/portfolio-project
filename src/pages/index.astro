@@ -1,29 +1,22 @@
 ---
 import Experience from '../components/Experience.astro';
 import Intro from '../components/Intro.astro';
-import Nav from '../components/Nav.astro';
 import Projects from '../components/Projects.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { personJsonLd, toScriptJson } from '../person-json-ld';
 import { getProfile } from '../profile';
 import { getSiteSections } from '../site-sections';
 
 const profile = await getProfile();
 const shown = new Set((await getSiteSections()).map((section) => section.id));
+
+// `site` is always set in astro.config.mjs; BaseLayout fails the build if it isn't.
+const structuredData = toScriptJson(personJsonLd(profile, Astro.site!));
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{profile.name}</title>
-  </head>
-  <body>
-    <header>
-      <Nav />
-    </header>
-    <main>
-      <Intro />
-      {shown.has('experience') && <Experience />}
-      {shown.has('projects') && <Projects />}
-    </main>
-  </body>
-</html>
+<BaseLayout title={profile.name} description={profile.bio}>
+  <script slot="head" type="application/ld+json" set:html={structuredData} />
+  <Intro />
+  {shown.has('experience') && <Experience />}
+  {shown.has('projects') && <Projects />}
+</BaseLayout>
