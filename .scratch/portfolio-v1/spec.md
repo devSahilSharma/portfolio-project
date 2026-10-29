@@ -31,7 +31,9 @@ In order:
 
 ### Rule: a section appears only when it has content
 
-Projects, Writing, and any nav link to them are not rendered when they have zero entries. There are no "coming soon" placeholders.
+Projects, Writing, Experience, and any nav link to them are not rendered when they have zero entries. There are no "coming soon" placeholders.
+
+Experience was added to this rule while building issue 03. It will normally always have entries, but an empty Experience section would otherwise show a bare heading.
 
 ### Out of scope for v1
 
