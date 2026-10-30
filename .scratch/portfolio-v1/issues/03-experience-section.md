@@ -1,6 +1,6 @@
 # 03: Experience section
 
-Status: completed.
+Status: resolved
 Blocked by: 01
 
 Spec: [spec.md](../spec.md)

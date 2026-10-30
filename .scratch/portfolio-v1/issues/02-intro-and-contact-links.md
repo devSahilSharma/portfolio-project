@@ -1,6 +1,6 @@
 # 02: Intro and Contact links
 
-Status: completed.
+Status: resolved
 Blocked by: 01
 
 Spec: [spec.md](../spec.md)

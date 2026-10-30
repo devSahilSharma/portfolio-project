@@ -1,6 +1,6 @@
 # 06: SEO and sharing basics
 
-Status: completed.
+Status: resolved
 Blocked by: 02
 
 Spec: [spec.md](../spec.md)

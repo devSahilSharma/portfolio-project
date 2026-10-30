@@ -1,6 +1,6 @@
 # 01: Scaffold the Astro site
 
-Status: completed.
+Status: resolved
 
 Spec: [spec.md](../spec.md)
 

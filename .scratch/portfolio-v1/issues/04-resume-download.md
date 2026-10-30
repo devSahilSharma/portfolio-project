@@ -1,6 +1,6 @@
 # 04: Résumé download
 
-Status: completed.
+Status: resolved
 Blocked by: 02
 
 Spec: [spec.md](../spec.md)
