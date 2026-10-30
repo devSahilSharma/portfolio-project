@@ -1,0 +1,9 @@
+---
+import { feedTitle } from '../posts';
+import { getProfile } from '../profile';
+
+// Lets feed readers find /rss.xml. Only on Writing pages, which exist only when the feed does.
+const profile = await getProfile();
+---
+
+<link rel="alternate" type="application/rss+xml" title={feedTitle(profile.name)} href="/rss.xml" />

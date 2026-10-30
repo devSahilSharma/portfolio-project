@@ -68,8 +68,9 @@ const projects = defineCollection({
 });
 
 // One Markdown file per Post; the file name is its slug, so it lives at /blog/<file name>.
+// Top level only: a Post in a subfolder would get a slug with a "/" in it.
 const posts = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/posts' }),
+  loader: glob({ pattern: '*.md', base: './src/content/posts' }),
   schema: z.object({
     title: z.string().min(1),
     description: z.string().min(1),
