@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320">
-  <rect width="320" height="320" fill="#d4d4d4"/>
-  <circle cx="160" cy="125" r="55" fill="#a3a3a3"/>
-  <path d="M60 300c0-60 45-100 100-100s100 40 100 100z" fill="#a3a3a3"/>
-  <text x="160" y="30" font-family="sans-serif" font-size="18" text-anchor="middle" fill="#525252">PLACEHOLDER</text>
-</svg>

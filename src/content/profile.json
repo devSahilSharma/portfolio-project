@@ -1,14 +1,14 @@
 {
-  "name": "PLACEHOLDER Your Name",
-  "jobTitle": "PLACEHOLDER Software Engineer",
-  "headline": "PLACEHOLDER Software engineer building things for the web",
-  "bio": "PLACEHOLDER Two or three sentences about who you are, what you work on, and what kind of opportunities you're open to. Replace this before launch.",
-  "photo": "../assets/profile-photo-placeholder.svg",
-  "photoAlt": "PLACEHOLDER Portrait of Your Name",
-  "email": "placeholder@example.com",
+  "name": "Sahil Sharma",
+  "jobTitle": "Specialist Programmer at Infosys",
+  "headline": "Figuring out",
+  "bio": "I am a human and some day any human will die. Therefore I will die someday.",
+  "photo": "../assets/profile-photo.jpg",
+  "photoAlt": "Sahil Sharma in sunglasses, giving a thumbs up",
+  "email": "sahilsharma.devmail@gmail.com",
   "social": {
-    "linkedin": "https://www.linkedin.com/in/placeholder",
-    "github": "https://github.com/placeholder",
-    "x": "https://x.com/placeholder"
+    "linkedin": "https://www.linkedin.com/in/sahil-sharma-aa540b2aa/",
+    "github": "https://github.com/sahilgsm2003",
+    "x": "https://x.com/sahil1_sh"
   }
 }

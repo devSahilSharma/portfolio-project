@@ -1,7 +1,7 @@
 {
   "this-site": {
     "name": "This site",
-    "description": "PLACEHOLDER My personal site: Experience, Projects and Writing, built as a static Astro site.",
+    "description": "My personal site: Experience, Projects and Writing, built as a static Astro site.",
     "stack": ["Astro", "TypeScript"],
     "demo": "/",
     "source": "https://github.com/devSahilSharma/portfolio-project"
