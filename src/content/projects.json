@@ -4,6 +4,6 @@
     "description": "PLACEHOLDER My personal site: Experience, Projects and Writing, built as a static Astro site.",
     "stack": ["Astro", "TypeScript"],
     "demo": "/",
-    "source": "https://github.com/placeholder/portfolio"
+    "source": "https://github.com/devSahilSharma/portfolio-project"
   }
 }
