@@ -1,0 +1,413 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-30T17:26:28.910Z",
+  "title": "Design System: The Line",
+  "extensions": {
+    "colorMeta": {
+      "ground": {
+        "role": "neutral",
+        "displayName": "Enamel Off-White",
+        "canonical": "oklch(96.6% 0.005 106)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252524",
+          "#424241",
+          "#61615f",
+          "#828280",
+          "#a5a5a2",
+          "#c9c9c6",
+          "#efefec"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Nameboard Black",
+        "canonical": "oklch(19.1% 0.000 89)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "line": {
+        "role": "primary",
+        "displayName": "Signal Orange",
+        "canonical": "oklch(67.1% 0.220 35)",
+        "tonalRamp": [
+          "#1c0300",
+          "#460f03",
+          "#761e06",
+          "#a9310f",
+          "#e24010",
+          "#fc7857",
+          "#fcb5a3",
+          "#fee9e4"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Enamel Off-White (on ink)",
+        "canonical": "oklch(96.6% 0.005 106)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252524",
+          "#424241",
+          "#61615f",
+          "#828280",
+          "#a5a5a2",
+          "#c9c9c6",
+          "#efefec"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Faded Timetable",
+        "canonical": "oklch(47.3% 0.008 106)",
+        "tonalRamp": [
+          "#0b0b09",
+          "#252522",
+          "#42423e",
+          "#62625d",
+          "#83837e",
+          "#a5a5a1",
+          "#c9c9c6",
+          "#eeeeed"
+        ]
+      },
+      "muted-ring": {
+        "role": "neutral",
+        "displayName": "Unreached Ring",
+        "canonical": "oklch(68.4% 0.010 106)",
+        "tonalRamp": [
+          "#0b0b09",
+          "#252522",
+          "#42423e",
+          "#62625c",
+          "#83837c",
+          "#a5a59f",
+          "#cacac3",
+          "#efefeb"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule Grey",
+        "canonical": "oklch(87.4% 0.009 106)",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#252523",
+          "#42423f",
+          "#61615e",
+          "#83837e",
+          "#a5a5a0",
+          "#cacac3",
+          "#efefeb"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Platform Panel",
+        "canonical": "oklch(92.9% 0.009 106)",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#252523",
+          "#424240",
+          "#61615e",
+          "#83837e",
+          "#a5a5a0",
+          "#cacac3",
+          "#efefeb"
+        ]
+      },
+      "track-blue": {
+        "role": "secondary",
+        "displayName": "Interchange Blue",
+        "canonical": "oklch(58.1% 0.229 263)",
+        "tonalRamp": [
+          "#000232",
+          "#011768",
+          "#0932a1",
+          "#1e52d5",
+          "#4178f8",
+          "#76a2ff",
+          "#b1c9fa",
+          "#e7effe"
+        ]
+      },
+      "track-green": {
+        "role": "secondary",
+        "displayName": "Interchange Green",
+        "canonical": "oklch(64.3% 0.162 152)",
+        "tonalRamp": [
+          "#001004",
+          "#022e14",
+          "#035027",
+          "#0b743d",
+          "#059c52",
+          "#4cbf76",
+          "#82e2a0",
+          "#cdfcd9"
+        ]
+      },
+      "track-yellow": {
+        "role": "secondary",
+        "displayName": "Interchange Yellow",
+        "canonical": "oklch(84.6% 0.169 84)",
+        "tonalRamp": [
+          "#110a00",
+          "#302302",
+          "#543e08",
+          "#7b5c07",
+          "#a27c1b",
+          "#cb9d2e",
+          "#fbbf18",
+          "#feedca"
+        ]
+      },
+      "track-purple": {
+        "role": "secondary",
+        "displayName": "Interchange Purple",
+        "canonical": "oklch(57.5% 0.263 294)",
+        "tonalRamp": [
+          "#0f0028",
+          "#2d085c",
+          "#4e1499",
+          "#7226d7",
+          "#9157f9",
+          "#ac90f7",
+          "#ccbffb",
+          "#efecfe"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Nameboard",
+        "purpose": "The owner's name on the Intro nameboard; board titles. Archivo 900 at wdth 62%."
+      },
+      "headline": {
+        "displayName": "Section on the line",
+        "purpose": "Uppercase section names (Experience, Projects) and the terminus board."
+      },
+      "title": {
+        "displayName": "Headline",
+        "purpose": "The Intro headline beside the first station. wdth 87.5%."
+      },
+      "body": {
+        "displayName": "Reading",
+        "purpose": "Prose and descriptions at full width; 65ch measure."
+      },
+      "label": {
+        "displayName": "Wayfinding label",
+        "purpose": "Uppercase nav stops, dates, row labels, the \"you are here\" flag. wdth 75%; dates tabular."
+      },
+      "mono": {
+        "displayName": "Code",
+        "purpose": "Inline code and code blocks in prose only."
+      }
+    },
+    "shadows": [
+      {
+        "name": "lift",
+        "value": "0 6px 18px rgb(20 20 20 / 0.18)",
+        "purpose": "Sign hover, with a 2px rise; removed on press."
+      },
+      {
+        "name": "pin",
+        "value": "0 4px 12px rgb(20 20 20 / 0.3)",
+        "purpose": "The \"you are here\" pin dot floating over the rail (flag at 0.25)."
+      },
+      {
+        "name": "floating-sign",
+        "value": "0 10px 28px rgb(20 20 20 / 0.28)",
+        "purpose": "The fixed track sign while a track is isolated."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The one easing for every transition and the dot fill."
+      },
+      {
+        "name": "state-fast",
+        "value": "0.25s-0.3s",
+        "purpose": "Sign lift, bullet fill and disc scale, nav dot fill, ring colour."
+      },
+      {
+        "name": "state-slow",
+        "value": "0.35s-0.45s",
+        "purpose": "Isolate dimming, dot core fill, track sign entrance."
+      },
+      {
+        "name": "station-reach",
+        "value": "view-timeline --dot; animation-range: cover 38% cover 50%",
+        "purpose": "Past station rings blacken and an ink core scales in as reached; IntersectionObserver fallback in src/scripts/line.ts."
+      },
+      {
+        "name": "here-rider",
+        "value": "scroll-driven, JS fallback",
+        "purpose": "The \"you are here\" pin rides the rail with scroll (sticky, 1:1 with scroll, so it also rides under reduced motion); a static pin on the first station shows without JS."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "prefers-reduced-motion: reduce",
+        "purpose": "Every animation, transition, smooth scroll and the riding pin is off; content is visible by default."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone-max",
+        "value": "559px"
+      },
+      {
+        "name": "exits-two-up",
+        "value": "560px-1023px"
+      },
+      {
+        "name": "nameboard-stack-max",
+        "value": "719px"
+      },
+      {
+        "name": "intro-two-column",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Exit sign",
+      "kind": "button",
+      "refersTo": "sign",
+      "description": "Black signage tile with a coloured bullet: contact exits, Demo and Source links.",
+      "html": "<a class=\"ds-sign\" href=\"#\"><span class=\"ds-sign__bullet\" style=\"--bullet:#2f6bff\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7 17 17 7M8 7h9v9\"/></svg></span>LinkedIn</a>",
+      "css": ".ds-sign{--bullet:#f4f4f0;display:inline-flex;align-items:center;gap:.7em;min-height:44px;padding:.55em 1em .55em .6em;border-radius:var(--tile-radius,10px);background:var(--ink,#141414);color:var(--paper,#f4f4f0);font-family:'Archivo Variable', 'Archivo', 'Helvetica Neue', Arial, sans-serif;font-weight:800;font-stretch:87.5%;font-size:1.25rem;line-height:1.1;text-decoration:none;transition:translate .3s cubic-bezier(.16,1,.3,1),box-shadow .3s cubic-bezier(.16,1,.3,1)}.ds-sign__bullet{flex:none;display:grid;place-items:center;width:1.75em;height:1.75em;border-radius:50%;background:var(--bullet);color:#141414}.ds-sign__bullet svg{width:58%;height:58%}.ds-sign:hover{translate:0 -2px;box-shadow:0 6px 18px rgb(20 20 20 / .18)}.ds-sign:active{translate:0 0;box-shadow:none}.ds-sign:focus-visible{outline:3px solid #141414;outline-offset:3px}@media (prefers-reduced-motion:reduce){.ds-sign{transition:none}.ds-sign:hover{translate:none}}"
+    },
+    {
+      "name": "Resume sign",
+      "kind": "button",
+      "refersTo": "sign-resume",
+      "description": "The yellow Résumé exit tile.",
+      "html": "<a class=\"ds-sign-resume\" href=\"#\"><span class=\"ds-sign-resume__bullet\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 4v12M6 11l6 6 6-6M5 20h14\"/></svg></span>Résumé (PDF)</a>",
+      "css": ".ds-sign-resume{display:inline-flex;align-items:center;gap:.7em;min-height:44px;padding:.55em 1em .55em .6em;border-radius:10px;background:#ffc21a;color:#141414;font-family:'Archivo Variable', 'Archivo', 'Helvetica Neue', Arial, sans-serif;font-weight:800;font-stretch:87.5%;font-size:1.25rem;line-height:1.1;text-decoration:none;transition:translate .3s cubic-bezier(.16,1,.3,1),box-shadow .3s cubic-bezier(.16,1,.3,1)}.ds-sign-resume__bullet{display:grid;place-items:center;width:1.75em;height:1.75em;border-radius:50%;background:#141414;color:#ffc21a}.ds-sign-resume__bullet svg{width:58%;height:58%}.ds-sign-resume:hover{translate:0 -2px;box-shadow:0 6px 18px rgb(20 20 20 / .18)}.ds-sign-resume:active{translate:0 0;box-shadow:none}.ds-sign-resume:focus-visible{outline:3px solid #141414;outline-offset:3px}@media (prefers-reduced-motion:reduce){.ds-sign-resume{transition:none}.ds-sign-resume:hover{translate:none}}"
+    },
+    {
+      "name": "Stack bullet",
+      "kind": "chip",
+      "refersTo": "stack-bullet",
+      "description": "Interchange bullet toggle; pressing isolates every stop on that track.",
+      "html": "<div class=\"ds-stack\"><span class=\"ds-stack__label\">Stack</span><button class=\"ds-bullet\" aria-pressed=\"false\" style=\"--bullet:#14a85a\"><span class=\"ds-bullet__dot\"></span>TypeScript</button><button class=\"ds-bullet\" aria-pressed=\"true\" style=\"--bullet:#8b3dff\"><span class=\"ds-bullet__dot\"></span>Postgres</button></div>",
+      "css": ".ds-stack{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;font-family:'Archivo Variable', 'Archivo', 'Helvetica Neue', Arial, sans-serif}.ds-stack__label{font-size:.8125rem;font-weight:800;font-stretch:75%;letter-spacing:.1em;text-transform:uppercase;color:#5c5c57}.ds-bullet{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:4px 13px 4px 5px;border:2px solid #141414;border-radius:999px;background:#f4f4f0;color:#141414;font:inherit;font-size:.9375rem;font-weight:750;font-stretch:87.5%;line-height:1;cursor:pointer;transition:background-color .25s cubic-bezier(.16,1,.3,1),color .25s cubic-bezier(.16,1,.3,1)}.ds-bullet__dot{width:22px;height:22px;border-radius:50%;background:var(--bullet);box-shadow:inset 0 0 0 2px #141414;transition:scale .3s cubic-bezier(.16,1,.3,1)}.ds-bullet:hover{background:#fff}.ds-bullet:hover .ds-bullet__dot{scale:1.12}.ds-bullet[aria-pressed=true]{background:#141414;color:#f4f4f0}.ds-bullet[aria-pressed=true] .ds-bullet__dot{box-shadow:inset 0 0 0 2px #f4f4f0}.ds-bullet:focus-visible{outline:3px solid #141414;outline-offset:3px}@media (prefers-reduced-motion:reduce){.ds-bullet,.ds-bullet__dot{transition:none}.ds-bullet:hover .ds-bullet__dot{scale:none}}"
+    },
+    {
+      "name": "Line-diagram nav",
+      "kind": "nav",
+      "refersTo": "nav-strip",
+      "description": "Sticky black strip: section stops joined by orange segments, Résumé pill at right.",
+      "html": "<nav class=\"ds-strip\"><ol class=\"ds-stops\"><li class=\"ds-stop\" data-here><a href=\"#\"><span class=\"ds-stop__dot\"></span><span class=\"ds-stop__name\">Intro</span></a></li><li class=\"ds-segment\"></li><li class=\"ds-stop\"><a href=\"#\"><span class=\"ds-stop__dot\"></span><span class=\"ds-stop__name\">Experience</span></a></li><li class=\"ds-segment\"></li><li class=\"ds-stop\"><a href=\"#\"><span class=\"ds-stop__dot\"></span><span class=\"ds-stop__name\">Projects</span></a></li></ol><a class=\"ds-resume\" href=\"#\"><span class=\"ds-resume__bullet\"><svg viewBox=\"0 0 24 24\" width=\"15\" height=\"15\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\"><path d=\"M12 4v12M6 11l6 6 6-6M5 20h14\"/></svg></span><span>Résumé</span></a></nav>",
+      "css": ".ds-strip{display:flex;align-items:center;gap:16px;min-height:60px;padding-inline:24px;background:#141414;color:#f4f4f0;font-family:'Archivo Variable', 'Archivo', 'Helvetica Neue', Arial, sans-serif}.ds-stops{flex:1;display:flex;align-items:center;padding:0;margin:0;list-style:none}.ds-stop a{display:flex;align-items:center;gap:10px;padding:8px 6px;color:#f4f4f0;text-decoration:none;border-radius:6px}.ds-stop a:focus-visible{outline:3px solid #f4f4f0}.ds-segment{width:72px;height:7px;margin-inline:4px;background:#ff4f1f}.ds-stop__dot{width:20px;height:20px;box-sizing:border-box;border-radius:50%;background:#f4f4f0;border:5px solid #ff4f1f;transition:background-color .3s cubic-bezier(.16,1,.3,1)}.ds-stop[data-here] .ds-stop__dot{background:#ff4f1f;box-shadow:inset 0 0 0 3px #141414}.ds-stop__name{font-size:.875rem;font-weight:800;font-stretch:75%;letter-spacing:.06em;text-transform:uppercase}.ds-stop a:hover .ds-stop__name{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:.3em}.ds-resume{display:flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border-radius:999px;background:#ffc21a;color:#141414;font-size:.875rem;font-weight:800;font-stretch:75%;letter-spacing:.06em;text-transform:uppercase;text-decoration:none}.ds-resume:hover{background:#f4f4f0}.ds-resume:focus-visible{outline:3px solid #f4f4f0;outline-offset:3px}.ds-resume__bullet{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#141414;color:#ffc21a}"
+    },
+    {
+      "name": "Nameboard",
+      "kind": "card",
+      "refersTo": "nameboard",
+      "description": "Black rounded board with heavy extra-condensed lettering and the orange line-name pill.",
+      "html": "<div class=\"ds-nameboard\"><h1 class=\"ds-nameboard__name\">Your Name</h1><p class=\"ds-nameboard__line\">Full-stack line</p></div>",
+      "css": ".ds-nameboard{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:16px 40px;padding:40px 48px;border-radius:18px;background:#141414;color:#f4f4f0;font-family:'Archivo Variable', 'Archivo', 'Helvetica Neue', Arial, sans-serif}.ds-nameboard__name{margin:0;font-size:6rem;font-weight:900;font-stretch:62%;letter-spacing:-.015em;word-spacing:.16em;line-height:.86}.ds-nameboard__line{align-self:start;margin:0;padding:.35em .75em;border-radius:.85em;background:#ff4f1f;color:#141414;font-size:1.25rem;font-weight:900;font-stretch:87.5%;letter-spacing:.02em;line-height:1.05;text-transform:uppercase}"
+    },
+    {
+      "name": "Station on the line",
+      "kind": "custom",
+      "refersTo": "station-dot",
+      "description": "A run of the orange line with a ringed station dot, a station board and its timestamp. Only the current station is orange.",
+      "html": "<div class=\"ds-run\"><span class=\"ds-dot ds-dot--current\"></span><div class=\"ds-station\"><span class=\"ds-board\">Company</span><div class=\"ds-role\">Senior Engineer</div><div class=\"ds-time\">2024 <span class=\"ds-to\"></span> Now</div></div></div>",
+      "css": ".ds-run{position:relative;padding:24px 0 24px 112px;background:#f4f4f0;color:#141414;font-family:'Archivo Variable', 'Archivo', 'Helvetica Neue', Arial, sans-serif}.ds-run::before{content:'';position:absolute;top:0;bottom:0;left:42px;width:28px;background:#ff4f1f}.ds-dot{position:absolute;z-index:1;left:34px;top:34px;width:44px;height:44px;box-sizing:border-box;border-radius:50%;background:#f4f4f0;border:9px solid #141414}.ds-dot--current{background:#ff4f1f}.ds-station{display:grid;justify-items:start;gap:12px}.ds-board{padding:.2em .35em;border-radius:13px;background:#141414;color:#f4f4f0;font-size:2.5rem;font-weight:900;font-stretch:62%;word-spacing:.16em;line-height:1}.ds-role{font-size:1.5rem;font-weight:800;font-stretch:87.5%;line-height:1.1}.ds-time{display:flex;align-items:center;gap:10px;font-weight:800;font-stretch:75%;letter-spacing:.06em;text-transform:uppercase;font-variant-numeric:tabular-nums}.ds-to{width:1.6em;height:3px;background:currentColor}"
+    },
+    {
+      "name": "You are here pin",
+      "kind": "custom",
+      "refersTo": "here-pin",
+      "description": "Ink pin with a paper ring and a vertical flag; rides the rail with scroll when motion is allowed.",
+      "html": "<span class=\"ds-pin\"><span class=\"ds-pin__dot\"></span><span class=\"ds-pin__flag\">You are here</span></span>",
+      "css": ".ds-pin{display:inline-flex;flex-direction:column;align-items:center;width:32px;font-family:'Archivo Variable', 'Archivo', 'Helvetica Neue', Arial, sans-serif}.ds-pin__dot{width:32px;height:32px;box-sizing:border-box;border-radius:50%;background:#141414;border:5px solid #f4f4f0;box-shadow:0 4px 12px rgb(20 20 20 / .3)}.ds-pin__flag{margin-top:4px;padding:.75em .32em .9em;border-radius:4px 4px 999px 999px;background:#141414;color:#f4f4f0;writing-mode:vertical-rl;font-size:.75rem;font-weight:800;font-stretch:75%;letter-spacing:.12em;line-height:1;text-transform:uppercase;white-space:nowrap;box-shadow:0 4px 12px rgb(20 20 20 / .25)}"
+    },
+    {
+      "name": "Track sign",
+      "kind": "custom",
+      "refersTo": "track-sign",
+      "description": "Floating pill shown while a Stack track is isolated, with a Clear button.",
+      "html": "<div class=\"ds-track-sign\" style=\"--track:#2f6bff\"><span class=\"ds-track-sign__dot\"></span><span class=\"ds-track-sign__text\">On the React track</span><button class=\"ds-track-sign__clear\">Clear</button></div>",
+      "css": ".ds-track-sign{display:inline-flex;align-items:center;gap:12px;padding:8px 8px 8px 10px;border-radius:999px;background:#141414;color:#f4f4f0;box-shadow:0 10px 28px rgb(20 20 20 / .28);font-family:'Archivo Variable', 'Archivo', 'Helvetica Neue', Arial, sans-serif}.ds-track-sign__dot{width:26px;height:26px;border-radius:50%;background:var(--track);box-shadow:inset 0 0 0 3px #f4f4f0}.ds-track-sign__text{font-weight:800;font-stretch:87.5%}.ds-track-sign__clear{min-height:36px;padding:0 16px;border:0;border-radius:999px;background:#f4f4f0;color:#141414;font:inherit;font-weight:800;font-stretch:87.5%;cursor:pointer}.ds-track-sign__clear:hover{background:#ffc21a}.ds-track-sign__clear:focus-visible{outline:3px solid #f4f4f0;outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Line",
+    "overview": "The site is one metro line drawn down the page. Black nameboards carry the names, a single fat signal-orange line runs down the left gutter from the first nameboard to a terminus, and everything the visitor reads sits on that line as a station or a stop on its branch. The world is transit wayfinding: enamel off-white ground, near-black signage with off-white type, ringed station dots, coloured interchange bullets. It is light only (`color-scheme: light`); there is no dark theme.\n\nDensity is generous and vertical. Content hangs off one continuous rail, sections abut so the line never breaks, and big condensed lettering does the work that imagery and cards would do elsewhere. Motion is lively but always optional: a \"you are here\" pin rides the line with scroll, past stations fill as they are reached, signs lift on hover, and tapping a Stack bullet isolates every stop on that track. Every bit of it is gated behind `prefers-reduced-motion: no-preference`, and content is fully visible without it.\n\nThe build is plain CSS: one global token file (`src/styles/global.css`) for tokens, base and the shared line pieces, plus each Astro component's scoped `<style>`. No Tailwind, no utility framework.",
+    "keyCharacteristics": [
+      "One unbroken orange line, top to terminus, at a fluid 12-36px width.",
+      "Black rounded nameboards with heavy, extra-condensed Archivo lettering.",
+      "Station dots: off-white fill, thick black ring; only the current station is orange.",
+      "Interchange bullets in a fixed four-colour set, assigned by hashing the item name.",
+      "Archivo's width axis is the type system: 62% for nameboards, 75-87.5% for labels and subheads, 100% for reading.",
+      "Light only; motion is lively and entirely off under reduced motion."
+    ],
+    "rules": [
+      {
+        "name": "The Route-Only Rule",
+        "body": "Orange lives on the route, the current station, progress and \"you are here\". It never fills a button, a tag, a heading or a decorative block.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Current Station Rule",
+        "body": "Exactly one station dot is orange-filled: the current role. Past stations fill black as they are reached; they never turn orange.",
+        "section": "colors"
+      },
+      {
+        "name": "The Hashed Track Rule",
+        "body": "Interchange colours come from the item name via `trackColour()`. Four colours, fixed; adding one is a system change.",
+        "section": "colors"
+      },
+      {
+        "name": "The Width-Axis Rule",
+        "body": "Hierarchy is carried by `font-stretch` as much as size: 62% for anything on a board, 75% for labels, 87.5% for signs and subheads, 100% for reading. Never fake condensing with a second family.",
+        "section": "typography"
+      },
+      {
+        "name": "The Timetable Rule",
+        "body": "Dates and numbers are tabular (`font-variant-numeric: tabular-nums`) everywhere: `time`, ordered lists, tables, the footer.",
+        "section": "typography"
+      },
+      {
+        "name": "The Open Gaps Rule",
+        "body": "Condensed 900 lettering closes its word gaps; board lettering reopens them (`word-spacing: 0.16em`, headline 0.12em).",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Signage Rule",
+        "body": "Signage is flat at rest. Shadows are soft, ink-tinted and blurred, and only for hover lift or for markers that float above the line.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** keep the line continuous: every block on the route is an `.on-line` run, and the line ends only in the terminus dot or a branch's last stop.",
+      "**Do** set every board name in Archivo 900 at wdth 62% on an ink board, and reopen word gaps.",
+      "**Do** gate every animation and transition behind `prefers-reduced-motion: no-preference` (or remove it under `reduce`), with content visible by default.",
+      "**Do** take Stack colours from `trackColour()` only.",
+      "**Do** keep focus visible: 3px solid ink outline, 3px offset; paper on ink surfaces.",
+      "**Do** write styles as plain CSS: tokens in `global.css`, layout in each component's scoped style."
+    ],
+    "donts": [
+      "**Don't** use orange for anything that is not the route, the current station, progress or \"you are here\".",
+      "**Don't** add a dark theme; the system is light only.",
+      "**Don't** add a second typeface for display or condensing; use Archivo's width axis.",
+      "**Don't** add Tailwind or a utility framework.",
+      "**Don't** give station dots shadows or orange fills beyond the current station.",
+      "**Don't** use icon fonts or glyphs for icons; signs carry inline SVG."
+    ]
+  }
+}

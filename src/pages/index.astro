@@ -2,6 +2,8 @@
 import Experience from '../components/Experience.astro';
 import Intro from '../components/Intro.astro';
 import Projects from '../components/Projects.astro';
+import Terminus from '../components/Terminus.astro';
+import TrackSign from '../components/TrackSign.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { personJsonLd, toScriptJson } from '../person-json-ld';
 import { getProfile } from '../profile';
@@ -16,7 +18,46 @@ const structuredData = toScriptJson(personJsonLd(profile, Astro.site!));
 
 <BaseLayout title={profile.name} description={profile.bio}>
   <script slot="head" type="application/ld+json" set:html={structuredData} />
+  <div class="rail" data-rail hidden aria-hidden="true">
+    <span class="here-pin marker">
+      <span class="here-pin__dot"></span>
+      <span class="here-pin__flag">You are here</span>
+    </span>
+  </div>
   <Intro />
   {shown.has('experience') && <Experience />}
   {shown.has('projects') && <Projects />}
+  <Terminus />
+  <TrackSign />
 </BaseLayout>
+
+<style>
+  /* The "you are here" marker rides the line as the page scrolls. Placed by src/scripts/line.ts. */
+  .rail {
+    position: absolute;
+    z-index: 3;
+    width: 0;
+    pointer-events: none;
+  }
+
+  .rail[hidden] {
+    display: none;
+  }
+
+  /* The pin's centre rides at the middle of the viewport (or higher, where the first station
+     starts above the middle, so the pin starts on it); its flag hangs down the line. */
+  .marker {
+    position: sticky;
+    top: calc(var(--ride, 50vh) - var(--pin) / 2);
+    translate: -50% 0;
+  }
+
+  /* Isolating a track: stops on it get the track's colour around their dot, the rest step back. */
+  :global(body[data-isolating] [data-tracks]:not([data-on-track])) {
+    opacity: 0.3;
+  }
+
+  :global(body[data-isolating] [data-tracks][data-on-track] .dot) {
+    outline: max(5px, calc(var(--line-w) * 0.28)) solid var(--track);
+  }
+</style>

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Open Graph image</title>
+    <!-- Source of public/og.png. Rendered at 1200x630 by scripts/og/render.mjs (npm run og), which
+         fills the name and job title from src/content/profile.json. Open it in a browser to preview. -->
+    <style>
+      @font-face {
+        font-family: 'Archivo';
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        src: url('../../node_modules/@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2')
+          format('woff2-variations');
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      html,
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: #f4f4f0;
+        color: #141414;
+        font-family: 'Archivo', sans-serif;
+      }
+
+      .board {
+        position: absolute;
+        inset: 40px 40px 170px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 30px;
+        padding: 40px 52px 44px;
+        border-radius: 18px;
+        background: #141414;
+        color: #f4f4f0;
+      }
+
+      .name {
+        font-size: 150px;
+        font-weight: 900;
+        font-stretch: 62%;
+        line-height: 0.86;
+        letter-spacing: -0.015em;
+        word-spacing: 0.16em;
+      }
+
+      .name.long {
+        font-size: 104px;
+      }
+
+      .pill {
+        align-self: flex-start;
+        padding: 10px 20px;
+        border-radius: 999px;
+        background: #ff4f1f;
+        color: #141414;
+        font-size: 30px;
+        font-weight: 900;
+        font-stretch: 87.5%;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+
+      .line {
+        position: absolute;
+        left: 144px;
+        top: 460px;
+        width: 36px;
+        height: 170px;
+        background: #ff4f1f;
+      }
+
+      .stn {
+        position: absolute;
+        left: 126px;
+        top: 509px;
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: #f4f4f0;
+        border: 14px solid #141414;
+      }
+
+      .here {
+        position: absolute;
+        left: 230px;
+        top: 527px;
+        padding: 6px 16px;
+        border-radius: 999px;
+        background: #141414;
+        color: #f4f4f0;
+        font-size: 24px;
+        word-spacing: 0.1em;
+        font-weight: 900;
+        font-stretch: 87.5%;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .bullets {
+        position: absolute;
+        right: 40px;
+        top: 523px;
+        display: flex;
+        gap: 12px;
+      }
+
+      .bullets span {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 3px solid #141414;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="board">
+      <p class="name" data-field="name">PLACEHOLDER Your Name</p>
+      <p class="pill" data-field="jobTitle">PLACEHOLDER Software Engineer</p>
+    </div>
+    <div class="line"></div>
+    <div class="stn"></div>
+    <p class="here">You are here</p>
+    <div class="bullets" aria-hidden="true">
+      <span style="background: #2f6bff"></span>
+      <span style="background: #14a85a"></span>
+      <span style="background: #ffc21a"></span>
+      <span style="background: #8b3dff"></span>
+    </div>
+    <script>
+      // Shrink a long name so it stays on the board.
+      const name = document.querySelector('.name');
+      if (name.textContent.length > 16) name.classList.add('long');
+    </script>
+  </body>
+</html>

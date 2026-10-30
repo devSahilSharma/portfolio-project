@@ -12,11 +12,13 @@
     "preview": "astro preview",
     "check": "astro check",
     "test": "vitest run",
-    "astro": "astro"
+    "astro": "astro",
+    "og": "node scripts/og/render.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/archivo": "^5.3.0",
     "astro": "^7.4.4"
   },
   "devDependencies": {

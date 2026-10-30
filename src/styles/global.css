@@ -1,0 +1,545 @@
+/* Tokens, base and the few shared pieces of the line diagram. Component layout lives in each
+   component's scoped <style>. */
+
+:root {
+  /* Ground, ink and the one route colour. Orange marks only the route, the current station,
+     progress and "you are here". */
+  --ground: #f4f4f0;
+  --ink: #141414;
+  --line: #ff4f1f;
+  --paper: #f4f4f0;
+  --muted: #5c5c57;
+  --muted-ring: #9a9a93;
+  --rule: #d6d6cf;
+  --panel: #e8e8e1;
+
+  /* Interchange colours for Stack bullets (see src/stack-tracks.ts). */
+  --track-blue: #2f6bff;
+  --track-green: #14a85a;
+  --track-yellow: #ffc21a;
+  --track-purple: #8b3dff;
+
+  --font: 'Archivo Variable', 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --mono: ui-monospace, 'Cascadia Code', 'SF Mono', Consolas, monospace;
+
+  /* Geometry of the line. The line's centre sits --rail-x in from the content edge; anything
+     riding it starts at --content-x. */
+  --gutter: clamp(16px, 3.9vw, 56px);
+  --page-max: 1520px;
+  --line-w: clamp(12px, 3.2vw - 10px, 36px);
+  --rail-x: clamp(20px, 14vw - 60px, 142px);
+  --content-x: calc(var(--rail-x) + clamp(32px, 4.4vw, 62px));
+  --dot: max(26px, calc(var(--line-w) * 1.56));
+  --dot-ring: max(6px, calc(var(--line-w) / 3));
+  --dot-big: max(34px, calc(var(--line-w) * 2));
+  --dot-big-ring: max(7px, calc(var(--line-w) * 0.39));
+  --board-radius: clamp(12px, 1.25vw, 18px);
+  --tile-radius: 10px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --lift: 0 6px 18px rgb(20 20 20 / 0.18);
+
+  color-scheme: light;
+  accent-color: var(--ink);
+  scrollbar-color: var(--ink) var(--ground);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 100%;
+  font-optical-sizing: auto;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-x: clip;
+  scroll-padding-top: 88px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(1rem, 0.94rem + 0.25vw, 1.125rem);
+  line-height: 1.55;
+  font-stretch: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  flex: 1;
+  position: relative;
+}
+
+main:focus {
+  outline: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 900;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+time,
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: var(--track-yellow);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.vh {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* A run of the line down the left gutter. Runs abut, so the page reads as one unbroken line. */
+.on-line {
+  position: relative;
+  padding-left: var(--content-x);
+}
+
+.on-line::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  left: calc(var(--rail-x) - var(--line-w) / 2);
+  width: var(--line-w);
+  background: var(--line);
+}
+
+/* Black nameboard with off-white type. */
+.board {
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: var(--board-radius);
+}
+
+/* Condensed, heavy station lettering. */
+.lettering {
+  font-weight: 900;
+  font-stretch: 62%;
+  letter-spacing: -0.01em;
+  /* Condensed heavy type closes up its word gaps; open them back up. */
+  word-spacing: 0.16em;
+  line-height: 0.9;
+}
+
+/* Station dots: off-white fill, thick black ring. Positioned by whoever places them. */
+.dot {
+  --size: var(--dot);
+  --ring: var(--dot-ring);
+  position: absolute;
+  z-index: 1;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: var(--ground);
+  border: var(--ring) solid var(--ink);
+}
+
+.dot--big {
+  --size: var(--dot-big);
+  --ring: var(--dot-big-ring);
+}
+
+/* A past station runs muted until the visitor reaches it. */
+.dot--past {
+  border-color: var(--muted-ring);
+}
+
+/* Only the current station is full orange. */
+.dot--current {
+  background: var(--line);
+}
+
+/* Reached: the dot fills. */
+.dot--lights {
+  view-timeline: --dot block;
+}
+
+.dot--lights::after {
+  content: '';
+  position: absolute;
+  inset: 16%;
+  border-radius: 50%;
+  background: var(--ink);
+  scale: 0;
+}
+
+.dot--current::after {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .dot--lights.dot--past {
+      animation: dot-reach linear both;
+      animation-timeline: --dot;
+      animation-range: cover 38% cover 50%;
+    }
+
+    .dot--lights::after {
+      animation: dot-fill var(--ease-out) both;
+      animation-timeline: --dot;
+      animation-range: cover 38% cover 50%;
+    }
+  }
+
+  .dot--lights::after {
+    transition: scale 0.45s var(--ease-out);
+  }
+
+  .dot--lights.dot--past {
+    transition: border-color 0.3s var(--ease-out);
+  }
+
+  .dot--lights.is-reached::after {
+    scale: 1;
+  }
+
+  .dot--lights.dot--past.is-reached {
+    border-color: var(--ink);
+  }
+}
+
+@keyframes dot-fill {
+  from {
+    scale: 0;
+  }
+  to {
+    scale: 1;
+  }
+}
+
+@keyframes dot-reach {
+  from {
+    border-color: var(--muted-ring);
+  }
+  to {
+    border-color: var(--ink);
+  }
+}
+
+/* Signage tile: black, off-white type, a coloured bullet. Exits, Demo and Source links. */
+.sign {
+  --bullet: var(--paper);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  min-height: 44px;
+  padding: 0.55em 1em 0.55em 0.6em;
+  border-radius: var(--tile-radius);
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 800;
+  font-stretch: 87.5%;
+  line-height: 1.1;
+  text-decoration: none;
+  transition:
+    translate 0.3s var(--ease-out),
+    box-shadow 0.3s var(--ease-out);
+}
+
+.sign__bullet {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 1.75em;
+  height: 1.75em;
+  border-radius: 50%;
+  background: var(--bullet);
+  color: var(--ink);
+}
+
+.sign__bullet svg {
+  width: 58%;
+  height: 58%;
+}
+
+.sign:hover {
+  translate: 0 -2px;
+  box-shadow: var(--lift);
+}
+
+.sign:active {
+  translate: 0 0;
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sign {
+    transition: none;
+  }
+
+  .sign:hover {
+    translate: none;
+  }
+}
+
+/* Words of a Post, an Experience: comfortable measure and quiet rhythm. */
+.prose {
+  max-width: 65ch;
+}
+
+.prose > * + * {
+  margin-top: 1em;
+}
+
+.prose :is(h2, h3, h4) {
+  margin-top: 2em;
+  font-stretch: 75%;
+  letter-spacing: -0.005em;
+}
+
+.prose :is(h2, h3, h4) + * {
+  margin-top: 0.6em;
+}
+
+.prose h2 {
+  font-size: 1.85em;
+}
+
+.prose h3 {
+  font-size: 1.4em;
+}
+
+.prose h4 {
+  font-size: 1.15em;
+}
+
+.prose a {
+  font-weight: 600;
+}
+
+.prose a:hover {
+  text-decoration-thickness: 3px;
+}
+
+.prose strong {
+  font-weight: 750;
+}
+
+.prose :is(ul, ol) {
+  padding-left: 1.6em;
+}
+
+.prose li + li {
+  margin-top: 0.35em;
+}
+
+.prose ul {
+  list-style: none;
+}
+
+.prose ul > li {
+  position: relative;
+}
+
+/* Little stations for list items. */
+.prose ul > li::before {
+  content: '';
+  position: absolute;
+  left: -1.3em;
+  top: 0.5em;
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+}
+
+.prose ol {
+  font-variant-numeric: tabular-nums;
+}
+
+.prose ol > li::marker {
+  font-weight: 800;
+}
+
+.prose blockquote {
+  padding: 1em 1.25em;
+  border-radius: var(--tile-radius);
+  background: var(--panel);
+  font-size: 1.1em;
+  font-weight: 550;
+}
+
+.prose :not(pre) > code {
+  padding: 0.1em 0.35em;
+  border-radius: 5px;
+  background: var(--panel);
+  font-family: var(--mono);
+  font-size: 0.88em;
+}
+
+.prose pre {
+  padding: 1.1em 1.25em;
+  border-radius: var(--tile-radius);
+  /* Overrides the highlighter's own theme background. */
+  background: var(--ink) !important;
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 0.88em;
+  line-height: 1.6;
+  overflow-x: auto;
+  scrollbar-color: var(--muted-ring) var(--ink);
+}
+
+.prose pre code {
+  font-family: inherit;
+}
+
+.prose img {
+  height: auto;
+  border-radius: var(--tile-radius);
+}
+
+.prose hr {
+  border: 0;
+  height: 4px;
+  width: 4em;
+  background: var(--ink);
+  margin-block: 2.25em;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.prose :is(th, td) {
+  padding: 0.5em 0.75em 0.5em 0;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+}
+
+.prose th {
+  font-weight: 800;
+  border-bottom: 2px solid var(--ink);
+}
+
+/* Section names on the line, with a boundary tick across it. */
+.section-title {
+  position: relative;
+  font-size: clamp(2.75rem, 1.5rem + 5vw, 6rem);
+  text-transform: uppercase;
+}
+
+.section-title::before {
+  content: '';
+  position: absolute;
+  top: 0.45em;
+  left: calc(var(--rail-x) - var(--content-x) - var(--line-w));
+  width: calc(var(--line-w) * 2);
+  height: max(6px, calc(var(--line-w) / 4));
+  border-radius: 2px;
+  background: var(--ink);
+  translate: 0 -50%;
+}
+
+/* "You are here": a black pin with an off-white ring (never a station's look) and a flag that
+   reads down the line from it. One sits on the first station; with motion on, a second one
+   rides the line instead (src/scripts/line.ts). */
+.here-pin {
+  --pin: max(24px, calc(var(--line-w) * 0.9));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: var(--pin);
+  pointer-events: none;
+}
+
+.here-pin__dot {
+  flex: none;
+  width: var(--pin);
+  height: var(--pin);
+  border-radius: 50%;
+  background: var(--ink);
+  border: max(4px, calc(var(--line-w) * 0.14)) solid var(--paper);
+  box-shadow: 0 4px 12px rgb(20 20 20 / 0.3);
+}
+
+.here-pin__flag {
+  margin-top: 4px;
+  padding: 0.75em 0.32em 0.9em;
+  border-radius: 4px 4px 999px 999px;
+  background: var(--ink);
+  color: var(--paper);
+  writing-mode: vertical-rl;
+  font-size: 0.75rem;
+  font-weight: 800;
+  font-stretch: 75%;
+  letter-spacing: 0.12em;
+  word-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgb(20 20 20 / 0.25);
+}

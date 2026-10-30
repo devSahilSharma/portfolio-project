@@ -1,0 +1,44 @@
+---
+import { getProfile } from '../profile';
+import { getSiteSections } from '../site-sections';
+
+const profile = await getProfile();
+const hasPosts = (await getSiteSections()).some((section) => section.id === 'writing');
+const year = new Date().getFullYear();
+---
+
+<footer class="footer wrap">
+  <p>{profile.name}, {year}</p>
+  <ul>
+    {hasPosts && <li><a href="/rss.xml">RSS</a></li>}
+    <li><a href="#main">Back to top</a></li>
+  </ul>
+</footer>
+
+<style>
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 24px;
+    padding-block: 28px 36px;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  .footer p {
+    font-variant-numeric: tabular-nums;
+  }
+
+  ul {
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    color: var(--ink);
+    font-weight: 700;
+  }
+</style>

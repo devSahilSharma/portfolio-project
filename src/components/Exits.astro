@@ -1,0 +1,60 @@
+---
+import ContactLinks from './ContactLinks.astro';
+import Icon from './Icon.astro';
+
+// The ways off the line: Contact links, then the Résumé.
+interface Props {
+  layout?: 'column' | 'row';
+}
+
+const { layout = 'column' } = Astro.props;
+---
+
+<ContactLinks class:list={['exits', `exits--${layout}`]}>
+  <li class="exits__resume">
+    <a class="sign exit exit--resume" href="/resume.pdf" target="_blank">
+      <span class="sign__bullet"><Icon name="download" /></span>
+      <span>Résumé (PDF)<span class="vh">, opens in a new tab</span></span>
+    </a>
+  </li>
+</ContactLinks>
+
+<style>
+  /* The list is rendered by ContactLinks, so its own scope can't reach it. */
+  :global(.exits) {
+    display: grid;
+    gap: 12px;
+    padding: 0;
+    list-style: none;
+    font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+  }
+
+  :global(.exits--column) {
+    grid-template-columns: 1fr;
+  }
+
+  :global(.exits--row) {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 11.5rem), 1fr));
+  }
+
+  .exits__resume {
+    display: flex;
+  }
+
+  .exit--resume {
+    --bullet: var(--ink);
+    flex: 1;
+    background: var(--track-yellow);
+    color: var(--ink);
+  }
+
+  .exit--resume .sign__bullet {
+    color: var(--track-yellow);
+  }
+
+  @media (min-width: 560px) and (max-width: 1023px) {
+    :global(.exits--column) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

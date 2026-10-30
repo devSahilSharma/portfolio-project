@@ -1,19 +1,54 @@
 ---
+import Icon from './Icon.astro';
 import { contactLinks } from '../contact-links';
 import { getProfile } from '../profile';
 
+interface Props {
+  class?: string;
+}
+
 const profile = await getProfile();
 const links = contactLinks(profile);
+
+// Each exit keeps its own bullet colour wherever it appears.
+const bullets: Record<string, string> = {
+  Email: 'var(--track-blue)',
+  LinkedIn: 'var(--track-green)',
+  GitHub: 'var(--paper)',
+  X: 'var(--track-purple)',
+};
 ---
 
-<ul>
+<ul class={Astro.props.class}>
   {
-    links.map(({ label, href }) => (
-      <li>
-        <a href={href} rel={href.startsWith('mailto:') ? undefined : 'me'}>
-          {label}
-        </a>
-      </li>
-    ))
+    links.map(({ label, href }) => {
+      const isEmail = href.startsWith('mailto:');
+      return (
+        <li>
+          <a
+            class="sign exit"
+            href={href}
+            rel={isEmail ? undefined : 'me'}
+            style={`--bullet: ${bullets[label] ?? 'var(--paper)'}`}
+          >
+            <span class="sign__bullet">
+              <Icon name={isEmail ? 'mail' : 'exit'} />
+            </span>
+            {label}
+          </a>
+        </li>
+      );
+    })
   }
+  <slot />
 </ul>
+
+<style>
+  li {
+    display: flex;
+  }
+
+  .exit {
+    flex: 1;
+  }
+</style>

@@ -16,17 +16,123 @@ const profile = await getProfile();
 
 <BaseLayout title={`Writing | ${profile.name}`} description={feedDescription(profile.name)}>
   <FeedLink slot="head" />
-  <h1>Writing</h1>
-  <ul>
-    {
-      posts.map((post) => (
-        <li>
-          <a href={postHref(post)}>{post.title}</a>
-          {' · '}
-          <time datetime={post.pubDate.toISOString()}>{formatPostDate(post.pubDate)}</time>
-          <p>{post.description}</p>
-        </li>
-      ))
-    }
-  </ul>
+  <div class="wrap page">
+    <div class="page-board board">
+      <h1 class="lettering">Writing</h1>
+      <a class="feed" href="/rss.xml">RSS feed</a>
+    </div>
+    <div class="on-line posts-run">
+      <ol class="posts">
+        {
+          posts.map((post) => (
+            <li class="post">
+              <span class="dot post__dot" aria-hidden="true" />
+              <time class="post__date" datetime={post.pubDate.toISOString()}>
+                {formatPostDate(post.pubDate)}
+              </time>
+              <h2 class="post__title">
+                <a href={postHref(post)}>{post.title}</a>
+              </h2>
+              <p class="post__desc">{post.description}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <span class="dot dot--big line-end" aria-hidden="true"></span>
+    </div>
+  </div>
 </BaseLayout>
+
+<style>
+  .page {
+    padding-top: clamp(20px, 3.9vw, 56px);
+  }
+
+  .page-board {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 16px 32px;
+    padding: clamp(22px, 3.4vw, 48px) clamp(20px, 4.4vw, 64px);
+  }
+
+  .page-board h1 {
+    font-size: clamp(3rem, 1.5rem + 7vw, 9rem);
+    line-height: 0.86;
+    text-transform: uppercase;
+  }
+
+  .feed {
+    color: var(--paper);
+    font-weight: 800;
+    font-stretch: 87.5%;
+  }
+
+  .feed:focus-visible {
+    outline-color: var(--paper);
+  }
+
+  .posts-run {
+    --post-pad: clamp(40px, 5vw, 72px);
+    padding-bottom: calc(var(--dot-big) + 8px);
+  }
+
+  .posts-run::before {
+    bottom: calc(var(--dot-big) / 2);
+  }
+
+  .posts {
+    padding: 0;
+    list-style: none;
+  }
+
+  .post {
+    position: relative;
+    max-width: 65ch;
+    padding-top: var(--post-pad);
+  }
+
+  .post__dot {
+    left: calc(var(--rail-x) - var(--content-x) - var(--size) / 2);
+    top: calc(var(--post-pad) + 0.75em - var(--size) / 2);
+  }
+
+  .post__date {
+    display: block;
+    font-size: 1rem;
+    font-weight: 800;
+    font-stretch: 75%;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .post__title {
+    margin-top: 8px;
+    font-size: clamp(1.75rem, 1.2rem + 2.2vw, 3rem);
+    font-stretch: 75%;
+    letter-spacing: -0.01em;
+    word-spacing: 0.1em;
+  }
+
+  .post__title a {
+    text-decoration-thickness: 3px;
+    text-underline-offset: 0.15em;
+  }
+
+  .post__title a:hover {
+    text-decoration-thickness: 6px;
+  }
+
+  .post__desc {
+    margin-top: 12px;
+    font-size: clamp(1.0625rem, 0.98rem + 0.3vw, 1.25rem);
+  }
+
+  .line-end {
+    left: calc(var(--rail-x) - var(--size) / 2);
+    bottom: 0;
+  }
+</style>

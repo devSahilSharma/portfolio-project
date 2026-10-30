@@ -26,4 +26,7 @@ Thumbs.db
 
 # local tooling, not part of the site
 .claude/
-.impeccable/
+.impeccable/*
+# Except the design system sidecar and surface briefs, which DESIGN.md and later design work rely on
+!.impeccable/design.json
+!.impeccable/surfaces/

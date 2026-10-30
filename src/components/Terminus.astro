@@ -1,0 +1,58 @@
+---
+import Exits from './Exits.astro';
+---
+
+<section class="terminus wrap" aria-labelledby="terminus-heading">
+  <div class="terminus__inner">
+    <span class="dot dot--big terminus__dot" data-route-end aria-hidden="true"></span>
+    <div class="terminus__board board">
+      <h2 id="terminus-heading" class="lettering">End of the line</h2>
+      <p>Say hi, or take the Résumé with you.</p>
+    </div>
+    <Exits layout="row" />
+  </div>
+</section>
+
+<style>
+  .terminus__inner {
+    position: relative;
+    padding-left: var(--content-x);
+    padding-bottom: clamp(56px, 7vw, 104px);
+  }
+
+  /* The last stretch of line runs into the terminus dot and stops. */
+  .terminus__inner::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: calc(var(--rail-x) - var(--line-w) / 2);
+    width: var(--line-w);
+    height: calc(var(--board-pad) + var(--title-fs) * 0.45 + 1px);
+    background: var(--line);
+  }
+
+  .terminus {
+    --title-fs: clamp(2.5rem, 1.4rem + 4.6vw, 6rem);
+    --board-pad: clamp(22px, 3vw, 44px);
+  }
+
+  .terminus__dot {
+    left: calc(var(--rail-x) - var(--size) / 2);
+    top: calc(var(--board-pad) + var(--title-fs) * 0.45 - var(--size) / 2);
+  }
+
+  .terminus__board {
+    padding: var(--board-pad) clamp(20px, 3.4vw, 48px);
+    margin-bottom: clamp(16px, 2vw, 24px);
+  }
+
+  .terminus__board h2 {
+    font-size: var(--title-fs);
+    text-transform: uppercase;
+  }
+
+  .terminus__board p {
+    margin-top: 0.6em;
+    font-size: clamp(1.0625rem, 0.95rem + 0.5vw, 1.375rem);
+  }
+</style>

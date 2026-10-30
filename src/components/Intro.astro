@@ -1,16 +1,191 @@
 ---
 import { Image } from 'astro:assets';
+import Exits from './Exits.astro';
 import { getProfile } from '../profile';
-import ContactLinks from './ContactLinks.astro';
 
 const profile = await getProfile();
 ---
 
-<section aria-labelledby="intro-name">
-  <Image src={profile.photo} alt={profile.photoAlt} width={160} loading="eager" />
-  <h1 id="intro-name">{profile.name}</h1>
-  <p>{profile.headline}</p>
-  <p>{profile.bio}</p>
-  <ContactLinks />
-  <p><a href="/resume.pdf" target="_blank">Résumé (PDF)</a></p>
+<section id="intro" class="intro wrap" aria-labelledby="intro-name">
+  <div class="nameboard board">
+    <h1 id="intro-name" class="nameboard__name lettering">{profile.name}</h1>
+    <p class="nameboard__line">{profile.jobTitle}</p>
+  </div>
+
+  <div class="on-line start">
+    <span class="dot dot--big start__dot" data-route-start aria-hidden="true"></span>
+    <span class="here-pin start__pin" aria-hidden="true">
+      <span class="here-pin__dot"></span>
+      <span class="here-pin__flag">You are here</span>
+    </span>
+    <div class="start__grid">
+      <div class="start__copy">
+        <div class="ring">
+          <Image src={profile.photo} alt={profile.photoAlt} width={304} loading="eager" />
+        </div>
+        <p class="headline">{profile.headline}</p>
+        <p class="bio">{profile.bio}</p>
+      </div>
+      <Exits />
+    </div>
+  </div>
 </section>
+
+<style>
+  .intro {
+    --head-fs: clamp(2.125rem, 1.2rem + 3.4vw, 4rem);
+    --start-pad: clamp(28px, 3.5vw, 50px);
+    padding-top: clamp(20px, 3.9vw, 56px);
+  }
+
+  .nameboard {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 16px 40px;
+    min-height: clamp(180px, 21vw, 300px);
+    padding: clamp(22px, 3.4vw, 48px) clamp(20px, 4.4vw, 64px);
+  }
+
+  .nameboard__name {
+    font-size: clamp(2.75rem, 11vw, 11rem);
+    line-height: 0.86;
+    letter-spacing: -0.015em;
+    overflow-wrap: break-word;
+    padding-bottom: 0.04em;
+  }
+
+  .nameboard__line {
+    align-self: start;
+    justify-self: end;
+    max-width: 18ch;
+    padding: 0.35em 0.75em;
+    border-radius: 0.85em;
+    background: var(--line);
+    color: var(--ink);
+    font-size: clamp(0.9375rem, 0.7rem + 1.1vw, 1.75rem);
+    font-weight: 900;
+    font-stretch: 87.5%;
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .start {
+    padding-top: var(--start-pad);
+    padding-bottom: clamp(48px, 6vw, 96px);
+  }
+
+  .start__dot {
+    top: calc(var(--start-pad) + var(--head-fs) * 0.5 - var(--size) / 2);
+    left: calc(var(--rail-x) - var(--size) / 2);
+  }
+
+  /* Sits in the first station until the riding marker takes over. */
+  .start__pin {
+    position: absolute;
+    z-index: 2;
+    top: calc(var(--start-pad) + var(--head-fs) * 0.5 - var(--pin) / 2);
+    left: calc(var(--rail-x) - var(--pin) / 2);
+  }
+
+  :global(.has-rail) .start__pin {
+    display: none;
+  }
+
+  .start__grid {
+    display: grid;
+    gap: clamp(28px, 4vw, 64px);
+  }
+
+  .start__copy {
+    display: flow-root;
+    max-width: 52rem;
+  }
+
+  /* The photo sits in a station ring; the headline wraps around it. */
+  .ring {
+    float: right;
+    shape-outside: circle(50%);
+    shape-margin: 16px;
+    width: clamp(92px, 11vw, 168px);
+    aspect-ratio: 1;
+    margin: 0 0 12px 20px;
+    border-radius: 50%;
+    border: var(--dot-big-ring) solid var(--ink);
+    background: var(--ground);
+    overflow: hidden;
+  }
+
+  .ring img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .headline {
+    font-size: var(--head-fs);
+    font-weight: 900;
+    font-stretch: 87.5%;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    word-spacing: 0.12em;
+    text-wrap: balance;
+  }
+
+  .bio {
+    clear: none;
+    max-width: 40ch;
+    margin-top: clamp(16px, 1.8vw, 26px);
+    font-size: clamp(1.0625rem, 0.95rem + 0.5vw, 1.375rem);
+    line-height: 1.45;
+  }
+
+  @media (min-width: 1024px) {
+    .start__grid {
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+      align-items: start;
+    }
+  }
+
+  /* On phones the headline needs the full width to start level with the station, so the
+     photo moves down beside the bio. */
+  @media (max-width: 559px) {
+    .start__copy {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas: 'head head' 'bio ring';
+      gap: 0 16px;
+    }
+
+    .headline {
+      grid-area: head;
+    }
+
+    .bio {
+      grid-area: bio;
+    }
+
+    .ring {
+      grid-area: ring;
+      float: none;
+      width: 84px;
+      margin: clamp(16px, 1.8vw, 26px) 0 0;
+    }
+  }
+
+  @media (max-width: 719px) {
+    .nameboard {
+      grid-template-columns: minmax(0, 1fr);
+      align-content: space-between;
+      min-height: 0;
+    }
+
+    .nameboard__line {
+      justify-self: start;
+      max-width: none;
+    }
+  }
+</style>

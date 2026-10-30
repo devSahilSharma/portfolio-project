@@ -1,6 +1,8 @@
 ---
 import { render } from 'astro:content';
+import StackBullets from './StackBullets.astro';
 import { getExperiences } from '../experience';
+import { trackKey } from '../stack-tracks';
 
 const experiences = await getExperiences();
 
@@ -9,24 +11,141 @@ const monthYear = new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric
 const isoMonth = (date: Date) => date.toISOString().slice(0, 7);
 ---
 
-<section id="experience" aria-labelledby="experience-heading">
-  <h2 id="experience-heading">Experience</h2>
-  {
-    experiences.map(async ({ company, title, start, end, stack, entry }) => {
-      const { Content } = await render(entry);
-      return (
-        <article>
-          <h3>
-            {title}, {company}
-          </h3>
-          <p>
-            <time datetime={isoMonth(start)}>{monthYear.format(start)}</time> –{' '}
-            {end ? <time datetime={isoMonth(end)}>{monthYear.format(end)}</time> : 'Present'}
-          </p>
-          <Content />
-          <p>Stack: {stack.join(', ')}</p>
-        </article>
-      );
-    })
-  }
+<section id="experience" class="wrap" aria-labelledby="experience-heading">
+  <div class="on-line run">
+    <h2 id="experience-heading" class="section-title lettering">Experience</h2>
+    <ol class="stations">
+      {
+        experiences.map(async ({ company, title, start, end, stack, entry }) => {
+          const { Content } = await render(entry);
+          return (
+            <li class:list={['station', { 'station--past': end }]} data-tracks={stack.map(trackKey).join('|')}>
+              <article>
+                <span
+                  class:list={['dot', 'station__dot', end ? 'dot--past dot--lights' : 'dot--current']}
+                  data-lights={end ? '' : undefined}
+                  aria-hidden="true"
+                />
+                <header class="station__head">
+                  <h3 class="station__title">
+                    <span class="station__company board lettering">{company}</span>
+                    <span class="vh">, </span>
+                    <span class="station__role">{title}</span>
+                  </h3>
+                  <p class="station__time">
+                    <time datetime={isoMonth(start)}>{monthYear.format(start)}</time>
+                    <span aria-hidden="true" class="station__to" />
+                    <span class="vh"> to </span>
+                    {end ? <time datetime={isoMonth(end)}>{monthYear.format(end)}</time> : 'Present'}
+                  </p>
+                </header>
+                <div class="prose station__body">
+                  <Content />
+                </div>
+                <StackBullets stack={stack} />
+              </article>
+            </li>
+          );
+        })
+      }
+    </ol>
+  </div>
 </section>
+
+<style>
+  .run {
+    padding-top: clamp(56px, 7vw, 112px);
+    padding-bottom: clamp(24px, 3vw, 40px);
+  }
+
+  .stations {
+    padding: 0;
+    list-style: none;
+  }
+
+  .station {
+    --board-fs: clamp(1.75rem, 1.1rem + 2.6vw, 3.25rem);
+    position: relative;
+    margin-top: clamp(40px, 5vw, 72px);
+    transition: opacity 0.35s var(--ease-out);
+  }
+
+  .station + .station {
+    margin-top: clamp(64px, 8vw, 120px);
+  }
+
+  .station__dot {
+    left: calc(var(--rail-x) - var(--content-x) - var(--size) / 2);
+    top: calc(var(--board-fs) * 0.7 - var(--size) / 2);
+  }
+
+  .station__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px 32px;
+  }
+
+  .station__title {
+    display: grid;
+    justify-items: start;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .station__company {
+    max-width: 100%;
+    padding: 0.2em 0.35em 0.2em;
+    font-size: var(--board-fs);
+    line-height: 1;
+    border-radius: calc(var(--board-radius) * 0.75);
+    overflow-wrap: break-word;
+  }
+
+  .station__role {
+    font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+    font-weight: 800;
+    font-stretch: 87.5%;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  .station__time {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: calc(var(--board-fs) * 0.7 - 0.7em);
+    font-size: clamp(1rem, 0.9rem + 0.4vw, 1.25rem);
+    font-weight: 800;
+    font-stretch: 75%;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .station__to {
+    width: 1.6em;
+    height: 3px;
+    background: currentColor;
+  }
+
+  .station--past .station__time {
+    color: var(--muted);
+  }
+
+  .station__body {
+    margin-top: clamp(18px, 2vw, 28px);
+  }
+
+  .station :global(.stack) {
+    margin-top: clamp(20px, 2.2vw, 30px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .station {
+      transition: none;
+    }
+  }
+</style>

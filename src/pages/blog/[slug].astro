@@ -1,6 +1,7 @@
 ---
 import { render } from 'astro:content';
 import FeedLink from '../../components/FeedLink.astro';
+import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { formatPostDate, getPosts, postSlug } from '../../posts';
 import { getProfile } from '../../profile';
@@ -18,18 +19,98 @@ const profile = await getProfile();
 
 <BaseLayout title={`${post.title} | ${profile.name}`} description={post.description}>
   <FeedLink slot="head" />
-  <article>
-    <h1>{post.title}</h1>
-    <p>
-      <time datetime={post.pubDate.toISOString()}>{formatPostDate(post.pubDate)}</time>
-      {
-        post.updatedDate && (
-          <>
-            · Updated <time datetime={post.updatedDate.toISOString()}>{formatPostDate(post.updatedDate)}</time>
-          </>
-        )
-      }
-    </p>
-    <Content />
+  <article class="wrap page">
+    <header class="page-board board">
+      <h1 class="lettering">{post.title}</h1>
+    </header>
+    <div class="on-line read">
+      <span class="dot dot--big read__dot" aria-hidden="true"></span>
+      <p class="read__date">
+        <time datetime={post.pubDate.toISOString()}>{formatPostDate(post.pubDate)}</time>
+        {
+          post.updatedDate && (
+            <>
+              <span class="read__sep" aria-hidden="true" />
+              Updated <time datetime={post.updatedDate.toISOString()}>{formatPostDate(post.updatedDate)}</time>
+            </>
+          )
+        }
+      </p>
+      <div class="prose read__body">
+        <Content />
+      </div>
+      <p class="read__back">
+        <a class="sign" href="/blog/">
+          <span class="sign__bullet"><Icon name="back" /></span>
+          All Writing
+        </a>
+      </p>
+      <span class="dot dot--big line-end" aria-hidden="true"></span>
+    </div>
   </article>
 </BaseLayout>
+
+<style>
+  .page {
+    padding-top: clamp(20px, 3.9vw, 56px);
+  }
+
+  .page-board {
+    padding: clamp(24px, 3.4vw, 48px) clamp(20px, 4.4vw, 64px);
+  }
+
+  .page-board h1 {
+    max-width: 22ch;
+    font-size: clamp(2.5rem, 1.4rem + 5vw, 6rem);
+    line-height: 0.9;
+    overflow-wrap: break-word;
+  }
+
+  .read {
+    --read-pad: clamp(28px, 3.5vw, 50px);
+    padding-top: var(--read-pad);
+    padding-bottom: calc(var(--dot-big) + 24px);
+  }
+
+  .read::before {
+    bottom: calc(var(--dot-big) / 2);
+  }
+
+  .read__dot {
+    left: calc(var(--rail-x) - var(--size) / 2);
+    top: calc(var(--read-pad) + 0.75em - var(--size) / 2);
+  }
+
+  .read__date {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 12px;
+    font-weight: 800;
+    font-stretch: 75%;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  .read__sep {
+    width: 1.4em;
+    height: 3px;
+    background: currentColor;
+  }
+
+  .read__body {
+    margin-top: clamp(24px, 3vw, 40px);
+    font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+    line-height: 1.65;
+  }
+
+  .read__back {
+    margin-top: clamp(40px, 5vw, 64px);
+  }
+
+  .line-end {
+    left: calc(var(--rail-x) - var(--size) / 2);
+    bottom: 0;
+  }
+</style>

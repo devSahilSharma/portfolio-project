@@ -1,23 +1,174 @@
 ---
+import Icon from './Icon.astro';
+import StackBullets from './StackBullets.astro';
 import { getProjects } from '../projects';
+import { trackKey } from '../stack-tracks';
 
 const projects = await getProjects();
 ---
 
-<section id="projects" aria-labelledby="projects-heading">
-  <h2 id="projects-heading">Projects</h2>
-  {
-    projects.map(({ name, description, stack, demo, source }) => (
-      <article>
-        <h3>{name}</h3>
-        <p>{description}</p>
-        <p>Stack: {stack.join(', ')}</p>
-        <p>
-          {demo && <a href={demo}>Demo</a>}
-          {demo && source && ' · '}
-          {source && <a href={source}>Source</a>}
-        </p>
-      </article>
-    ))
-  }
+<section id="projects" class="wrap" aria-labelledby="projects-heading">
+  <div class="on-line run">
+    <h2 id="projects-heading" class="section-title lettering">Projects</h2>
+    <div class="branch">
+      <ol class="stops">
+        {
+          projects.map(({ name, description, stack, demo, source }, index) => (
+            <li class:list={['stop', { 'stop--endcap': index === 0 }]} data-tracks={stack.map(trackKey).join('|')}>
+              <article>
+                <span
+                  class:list={['dot', 'stop__dot', 'dot--lights', { 'dot--big': index === 0 }]}
+                  data-lights
+                  aria-hidden="true"
+                />
+                <h3 class="stop__name">
+                  <span class="board lettering">{name}</span>
+                </h3>
+                <p class="stop__desc">{description}</p>
+                <StackBullets stack={stack} />
+                <ul class="stop__links">
+                  {demo && (
+                    <li>
+                      <a class="sign" href={demo} style="--bullet: var(--track-yellow)">
+                        <span class="sign__bullet">
+                          <Icon name="exit" />
+                        </span>
+                        Demo<span class="vh">: {name}</span>
+                      </a>
+                    </li>
+                  )}
+                  {source && (
+                    <li>
+                      <a class="sign" href={source}>
+                        <span class="sign__bullet">
+                          <Icon name="exit" />
+                        </span>
+                        Source<span class="vh">: {name}</span>
+                      </a>
+                    </li>
+                  )}
+                </ul>
+              </article>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
 </section>
+
+<style>
+  .run {
+    padding-top: clamp(64px, 8vw, 128px);
+    padding-bottom: clamp(72px, 9vw, 140px);
+  }
+
+  /* The branch leaves the main line in a curve and runs down beside it. Its rail sits where
+     the main content starts; stops ride it. */
+  .branch {
+    --gap: calc(var(--content-x) - var(--rail-x));
+    --curve-h: clamp(40px, 5vw, 72px);
+    position: relative;
+    margin-top: clamp(16px, 2vw, 28px);
+    padding-top: var(--curve-h);
+  }
+
+  .branch::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc(var(--gap) * -1);
+    width: calc(var(--gap) + var(--line-w));
+    height: calc(var(--curve-h) + 1px);
+    border-top: var(--line-w) solid var(--line);
+    border-right: var(--line-w) solid var(--line);
+    border-top-right-radius: calc(var(--line-w) + 24px);
+  }
+
+  .stops {
+    padding: 0;
+    list-style: none;
+  }
+
+  .stop {
+    --board-fs: clamp(1.5rem, 1rem + 1.8vw, 2.5rem);
+    position: relative;
+    padding-left: calc(var(--line-w) + clamp(24px, 3.4vw, 48px));
+    padding-bottom: clamp(56px, 6vw, 88px);
+    transition: opacity 0.35s var(--ease-out);
+  }
+
+  .stop--endcap {
+    --board-fs: clamp(2.25rem, 1rem + 5vw, 5.5rem);
+  }
+
+  /* Each stop carries its stretch of the branch; the last one ends at its dot. */
+  .stop::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--line-w);
+    background: var(--line);
+  }
+
+  .stop:first-child::before {
+    top: -1px;
+  }
+
+  .stop:last-child {
+    padding-bottom: 0;
+  }
+
+  .stop:last-child::before {
+    bottom: auto;
+    height: calc(var(--board-fs) * 0.7 + 1px);
+  }
+
+  .stop__dot {
+    left: calc(var(--line-w) / 2 - var(--size) / 2);
+    top: calc(var(--board-fs) * 0.7 - var(--size) / 2);
+  }
+
+  .stop__name .board {
+    display: inline-block;
+    max-width: 100%;
+    padding: 0.2em 0.35em;
+    font-size: var(--board-fs);
+    line-height: 1;
+    border-radius: calc(var(--board-radius) * 0.75);
+    overflow-wrap: break-word;
+  }
+
+  .stop__desc {
+    max-width: 52ch;
+    margin-top: clamp(14px, 1.6vw, 22px);
+    font-size: clamp(1.0625rem, 0.98rem + 0.3vw, 1.25rem);
+  }
+
+  .stop--endcap .stop__desc {
+    font-size: clamp(1.125rem, 0.95rem + 0.8vw, 1.625rem);
+    line-height: 1.4;
+  }
+
+  .stop :global(.stack) {
+    margin-top: clamp(18px, 2vw, 26px);
+  }
+
+  .stop__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: clamp(18px, 2vw, 26px);
+    padding: 0;
+    list-style: none;
+    font-size: 1.125rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stop {
+      transition: none;
+    }
+  }
+</style>
