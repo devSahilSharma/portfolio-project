@@ -22,6 +22,7 @@ const profile = await getProfile();
       posts.map((post) => (
         <li>
           <a href={postHref(post)}>{post.title}</a>
+          {' · '}
           <time datetime={post.pubDate.toISOString()}>{formatPostDate(post.pubDate)}</time>
           <p>{post.description}</p>
         </li>
