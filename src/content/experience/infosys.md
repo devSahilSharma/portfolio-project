@@ -1,7 +1,7 @@
 ---
 company: Infosys
 title: Specialist Programmer
-start: 2023-01-01
+start: 2026-06-08
 stack: [Python, Google ADK, API and Database design]
 ---
 
