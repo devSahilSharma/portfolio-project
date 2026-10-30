@@ -1,6 +1,6 @@
 # 07: Writing (Posts) and RSS, hidden until the first Post
 
-Status: ready-for-agent
+Status: resolved
 Blocked by: 05, 06
 
 Spec: [spec.md](../spec.md)

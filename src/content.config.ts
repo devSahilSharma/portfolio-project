@@ -67,4 +67,17 @@ const projects = defineCollection({
     }),
 });
 
-export const collections = { profile, experience, projects };
+// One Markdown file per Post; the file name is its slug, so it lives at /blog/<file name>.
+const posts = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/posts' }),
+  schema: z.object({
+    title: z.string().min(1),
+    description: z.string().min(1),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    // A draft is never built: not in the index, the RSS feed or the sitemap.
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { profile, experience, projects, posts };

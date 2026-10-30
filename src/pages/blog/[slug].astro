@@ -1,0 +1,36 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPosts } from '../../posts';
+import { getProfile } from '../../profile';
+
+// One page per published Post; a draft has no page.
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { slug: post.entry.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post.entry);
+const profile = await getProfile();
+
+const formatDate = (date: Date) => date.toLocaleDateString('en-US', { dateStyle: 'long', timeZone: 'UTC' });
+---
+
+<BaseLayout title={`${post.title} | ${profile.name}`} description={post.description}>
+  <link slot="head" rel="alternate" type="application/rss+xml" title={`${profile.name}: Writing`} href="/rss.xml" />
+  <article>
+    <h1>{post.title}</h1>
+    <p>
+      <time datetime={post.pubDate.toISOString()}>{formatDate(post.pubDate)}</time>
+      {
+        post.updatedDate && (
+          <>
+            · Updated <time datetime={post.updatedDate.toISOString()}>{formatDate(post.updatedDate)}</time>
+          </>
+        )
+      }
+    </p>
+    <Content />
+  </article>
+</BaseLayout>

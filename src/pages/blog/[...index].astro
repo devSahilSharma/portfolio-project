@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { pathsIfAny } from '../../paths-if-any';
+import { getPosts } from '../../posts';
+import { getProfile } from '../../profile';
+
+// Builds /blog only when there is at least one published Post (see paths-if-any.ts).
+export async function getStaticPaths() {
+  return pathsIfAny(await getPosts(), { index: undefined });
+}
+
+const posts = await getPosts();
+const profile = await getProfile();
+---
+
+<BaseLayout title={`Writing | ${profile.name}`} description={`Posts by ${profile.name}.`}>
+  <link slot="head" rel="alternate" type="application/rss+xml" title={`${profile.name}: Writing`} href="/rss.xml" />
+  <h1>Writing</h1>
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <a href={`/blog/${post.entry.id}/`}>{post.title}</a>
+          <time datetime={post.pubDate.toISOString()}>{post.pubDate.toLocaleDateString('en-US', { dateStyle: 'long', timeZone: 'UTC' })}</time>
+          <p>{post.description}</p>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>
