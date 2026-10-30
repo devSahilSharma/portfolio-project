@@ -3,7 +3,7 @@
     "name": "This site",
     "description": "PLACEHOLDER My personal site: Experience, Projects and Writing, built as a static Astro site.",
     "stack": ["Astro", "TypeScript"],
-    "demo": "https://placeholder.pages.dev",
+    "demo": "/",
     "source": "https://github.com/placeholder/portfolio"
   }
 }

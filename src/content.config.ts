@@ -54,7 +54,10 @@ const projects = defineCollection({
       name: z.string().min(1),
       description: z.string().min(1),
       stack: z.array(z.string().min(1)).min(1),
-      demo: z.url({ protocol: /^https$/ }).optional(),
+      // A path such as "/" is a demo on this site, so it follows the site URL set in astro.config.mjs.
+      demo: z
+        .union([z.url({ protocol: /^https$/ }), z.string().regex(/^\/(?!\/)/, 'must start with a single "/"')])
+        .optional(),
       source: z.url({ protocol: /^https$/ }).optional(),
     })
     // A Project is something a visitor can open themselves.
