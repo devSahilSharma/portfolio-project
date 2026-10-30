@@ -1,6 +1,6 @@
 # 08: Deploy to Cloudflare Pages with analytics
 
-Status: ready-for-human
+Status: resolved
 Blocked by: 01
 
 Spec: [spec.md](../spec.md)
